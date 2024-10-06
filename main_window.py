@@ -15,7 +15,7 @@ rd_answer_2 = QRadioButton()
 rd_answer_3 = QRadioButton()
 rd_answer_4 = QRadioButton()
 
-btn_next = QPushButton("відповідь")
+btn_next = QPushButton("Відповісти")
 
 radio_button_box = QGroupBox("варіанти відповідей")
 radio_button_group = QButtonGroup()
