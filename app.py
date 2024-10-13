@@ -6,6 +6,7 @@ from PyQt6.QtWidgets import QApplication
 app = QApplication([])
 
 from main_window import *
+from menu_window import*
 class Question():
     def __init__(self, question_text, answer_text, wrong:tuple):
         self.question_text = question_text
@@ -26,6 +27,7 @@ question_list = [ q1,q2,q3,q4 ]
 radio_button_list = [rd_answer_1,rd_answer_2,rd_answer_3,rd_answer_4,]
 
 def new_question():
+    global random_question
     random_question = choice(question_list)
 
     shuffle(radio_button_list)
@@ -39,11 +41,28 @@ def new_question():
 
 new_question()
 
+def check_result():
+    correct_answer_ld.setText(random_question.answer_text)
+    radio_button_group.setExclusive(False)
+    for btn in radio_button_list:
+        if btn.isChecked():
+            btn.setChecked(False)
+            if btn.text() == random_question.answer_text:
+             result_ld.setText("правельно")
+             break
+        
+    else:
+        result_ld.setText("не правельно")
+    radio_button_group.setExclusive(True)
+
+
+
 def change_box():
     if btn_next.text() == "Відповісти":
         radio_button_box.hide()
         answer_box.show()
         btn_next.setText("наступне питання")
+        check_result()
     elif btn_next.text() == "наступне питання":
         radio_button_box.show()
         answer_box.hide()
@@ -53,7 +72,14 @@ def change_box():
 
 btn_next.clicked.connect(change_box)
 
+def open_menu():
+    window.hide()
+    menu_window.show()
 
+def close_menu():
+    ...
+
+menu_btn.clicked.connect(open_menu)
 
 
 
