@@ -77,9 +77,36 @@ def open_menu():
     menu_window.show()
 
 def close_menu():
-    ...
+    window.show()
+    menu_window.show()
 
 menu_btn.clicked.connect(open_menu)
+menu_back_btn.clicked.connect(close_menu)
+
+
+def clear_menu():
+    menu_question_text_input.clear()
+    menu_answer_text_input.clear()
+    menu_wrong_1_input.clear()
+    menu_wrong_2_input.clear()
+    menu_wrong_3_input.clear()
+
+menu_btn_clear.clicked.connect(clear_menu)
+def add_question():
+    new_q = Question(
+        menu_question_text_input.text(),
+        menu_answer_text_input.text(),
+        (
+            menu_wrong_1_input.text(),
+            menu_wrong_2_input.text(),
+            menu_wrong_3_input.text(),
+        )
+    )
+    question_list.append(new_q)
+    close_menu()
+    clear_menu()
+menu_btn_add.clicked.connect(add_question)
+    
 
 
 
